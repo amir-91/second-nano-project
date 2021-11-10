@@ -2,55 +2,41 @@ const date = document.getElementsByClassName('date')
 const anc = document.querySelectorAll('.anc')
 const nav = document.getElementById('nav-bar')
 const dateData = [...date]
+const sec = ['sec-1', 'sec-2', 'sec-3', 'sec-4']
 
 //dynamic navbar
 
-var content = document.createElement('div');
-	content.innerHTML = "";
-	var liststart = document.createElement('ul');
-	var listelement1 = document.createElement('li');
-	var listelement2 = document.createElement('li');
-  var listelement3 = document.createElement('li');
-  var listelement4 = document.createElement('li');
-
-  listelement1.classList = 'sec-1'
-  listelement2.classList = 'sec-2'
-  listelement3.classList = 'sec-3'
-  listelement4.classList = 'sec-4'
-
-
-	listelement1.innerHTML = '<a href="#sec-1">section 1</a>';
-	listelement2.innerHTML = '<a href="#sec-2">section 2</a>';
-  listelement3.innerHTML = '<a href="#sec-3">section 3</a>';
-  listelement4.innerHTML = '<a href="#sec-4">section 4</a>';
-
-	liststart.appendChild(listelement1);
-	liststart.appendChild(listelement2);
-  liststart.appendChild(listelement3);
-  liststart.appendChild(listelement4);
-
-
-	nav.appendChild(liststart);
+const ul = document.createElement('ul')
+  sec.map((section, i) => {
+    const li = document.createElement('li')
+    li.classList = `${section} container `
+    li.innerHTML = `<a id="${section}" href="">section ${i+1}</a>`
+    ul.appendChild(li)
+    nav.appendChild(ul);
+  })
  
   // navigate to section dynamically
 
-document.querySelector('#sec-1').addEventListener('click', function() {
-  document.querySelector('#sec-1').scrollIntoView();
+document.getElementById('sec-1').addEventListener('click', function(e) {
+  e.preventDefault()
+  document.querySelector('#section-1').scrollIntoView();
 });
 
-document.querySelector('#sec-2').addEventListener('click', function() {
-  document.querySelector('#sec-2').scrollIntoView();
+document.getElementById('sec-2').addEventListener('click', function(e) {
+  e.preventDefault()
+  document.querySelector('#section-2').scrollIntoView();
 });
 
-document.querySelector('#sec-3').addEventListener('click', function() {
-  document.querySelector('#sec-3').scrollIntoView();
+document.getElementById('sec-3').addEventListener('click', function(e) {
+  e.preventDefault()
+  document.querySelector('#section-3').scrollIntoView();
 });
 
-document.querySelector('#sec-4').addEventListener('click', function() {
-  document.querySelector('#sec-4').scrollIntoView();
+document.getElementById('sec-4').addEventListener('click', function(e) {
+  e.preventDefault()
+  document.querySelector('#section-4').scrollIntoView();
 });
 	
-
  anc.forEach((item) => {
   item.addEventListener('click', (e) => {
     e.preventDefault()
@@ -85,13 +71,13 @@ window.onscroll = () => {
   sections.forEach((section) => {
     const sectionTop = section.offsetTop
     if (pageYOffset >= sectionTop-300) {
-      current = section.getAttribute("id")
+      current = section.getAttribute("class")
      }
   });
 
   navLi.forEach((li) => {
     li.classList.remove("active")
-    if (li.classList.contains(current)) {
+    if (li.classList.value === current) {
       li.classList.add("active")
     }
   });
